@@ -1,0 +1,10 @@
+/* Colors */
+$color-foreground: #222;
+$color-background: #e2e2e2;
+
+/* Global Size */
+$header-height: 54px;
+
+$toolbar-height: 54px;
+
+$content-height: calc(100% - #{$header-height} - #{$toolbar-height});

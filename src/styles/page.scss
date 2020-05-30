@@ -1,0 +1,19 @@
+@import "variables.scss";
+
+/* Page */
+
+.page {
+  background-color: $color-foreground;
+  overflow: hidden;
+  height: 100%;
+
+  /* Main container */
+  &__container {
+    display: flex;
+    height: 100%;
+    margin: 0 auto;
+    max-width: 640px;
+
+    background-color: $color-background;
+  }
+}
