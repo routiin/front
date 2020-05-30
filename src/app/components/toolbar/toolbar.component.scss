@@ -1,0 +1,15 @@
+@import "variables";
+
+:host {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  height: $toolbar-height;
+  padding: 0 20px;
+  background-color: #fff;
+  border-top: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
+  position: sticky;
+  bottom: 0;
+  left: 0;
+}

@@ -1,0 +1,35 @@
+<div class="rtn-card-back">
+  <div
+    *ngIf="isShownLeftSide"
+    class="rtn-card-back__side"
+    [class.rtn-card-animate]="isAnimation"
+    [ngStyle]="backSideStyle"
+  >
+    <button mat-flat-button class="action-button action-button--left">
+      Left
+    </button>
+  </div>
+
+  <div
+    *ngIf="isShownRightSide"
+    class="rtn-card-back__side"
+    [class.rtn-card-animate]="isAnimation"
+    [ngStyle]="backSideStyle"
+  >
+    <button mat-flat-button class="action-button action-button--right">
+      Right
+    </button>
+  </div>
+</div>
+
+<div
+  class="rtn-card-front"
+  cdkDrag
+  cdkDragLockAxis="x"
+  (cdkDragStarted)="started()"
+  (cdkDragMoved)="moved($event)"
+  (cdkDragEnded)="ended()"
+  [class.rtn-card-animate]="isAnimation"
+>
+  Front
+</div>
