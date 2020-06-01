@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './login.component.html',
@@ -7,7 +8,7 @@ import { AuthService } from 'src/app/core/auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  constructor(private _authService: AuthService) {
+  constructor(private _authService: AuthService, private _router: Router) {
     this._authService
       .init()
       .subscribe((isAuth) => console.log('isAuth', isAuth));

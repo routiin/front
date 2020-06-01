@@ -16,10 +16,9 @@
   Login via Google
 </button>
 
-<button
-  class="login__btn login__btn--google"
-  mat-flat-button
-  routerLink="https://api.routiin.ru/ouath2/authorize/google?redirect_uri:https://routiin.ru/oauth2"
->
-  External Google
+<button class="login__btn login__btn--google" mat-flat-button>
+  <a
+    href="https://api.routiin.ru/oauth2/authorize/google?redirect_uri=https://routiin.ru/oauth2"
+    >External Google</a
+  >
 </button>
