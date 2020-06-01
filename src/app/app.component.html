@@ -1,7 +1,7 @@
-<rtn-header></rtn-header>
+<rtn-header *ngIf="isLogin()"></rtn-header>
 
 <div class="content">
   <router-outlet></router-outlet>
 </div>
 
-<rtn-toolbar></rtn-toolbar>
+<rtn-toolbar *ngIf="isLogin()"></rtn-toolbar>

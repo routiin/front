@@ -1,33 +1,33 @@
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
-import { AppRoutingModule } from './app.routing.module';
-import { AppComponent } from './app.component';
-import { SharedModule } from './shared/shared.module';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconRegistry } from '@angular/material/icon';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-
-const ICONS = ['today', 'feed', 'progress', 'add', 'profile'];
-const ICONS_PATH = 'assets/icons/';
+import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app.routing.module';
+import { SharedModule } from './shared/shared.module';
+import { IconsService } from './core/icon-registry.service';
+import { TokenInterceptor } from './core/auth/token.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    SharedModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AppRoutingModule,
+    SharedModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {
-  constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-    ICONS.forEach((name) => {
-      iconRegistry.addSvgIcon(
-        name,
-        sanitizer.bypassSecurityTrustResourceUrl(`${ICONS_PATH}${name}.svg`)
-      );
-    });
+  constructor(iconsService: IconsService) {
+    iconsService.registerIcons();
   }
 }

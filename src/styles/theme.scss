@@ -1,0 +1,14 @@
+@import "~@angular/material/theming";
+
+$custom-typography: mat-typography-config(
+  $font-family: "Inter, sans-serif",
+);
+
+@include mat-core($custom-typography);
+
+$client-primary: mat-palette($mat-indigo);
+$client-accent: mat-palette($mat-pink, A200, A100, A400);
+$client-warn: mat-palette($mat-red);
+$client-theme: mat-light-theme($client-primary, $client-accent, $client-warn);
+
+@include angular-material-theme($client-theme);

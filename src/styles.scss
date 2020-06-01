@@ -1,20 +1,7 @@
-@import "~@angular/material/theming";
-
 @import "~normalize.css";
 
 @import "styles/box-sizing.scss";
 @import "styles/fonts.scss";
 @import "styles/typography.scss";
+@import "styles/theme.scss";
 @import "styles/page.scss";
-
-$custom-typography: mat-typography-config(
-  $font-family: "Inter",
-);
-@include mat-core($custom-typography);
-
-$client-primary: mat-palette($mat-indigo);
-$client-accent: mat-palette($mat-pink, A200, A100, A400);
-$client-warn: mat-palette($mat-red);
-$client-theme: mat-light-theme($client-primary, $client-accent, $client-warn);
-
-@include angular-material-theme($client-theme);
