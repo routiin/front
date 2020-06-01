@@ -34,7 +34,7 @@ export class AuthService {
     return this._http
       .get(SOCIAL_LOGIN_URI[name], {
         params: {
-          redirect_uri: 'https://routiin.ru/oauth2',
+          redirect_uri: 'https://api.routiin.ru/oauth2',
         },
         withCredentials: true,
       })
