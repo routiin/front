@@ -1,24 +1,17 @@
 <h1 class="login__title">Routtin</h1>
 
-<button
+<a
   class="login__btn login__btn--fb"
   mat-flat-button
-  (click)="loginFacebook()"
+  href="https://api.routiin.ru/oauth2/authorize/facebook?redirect_uri=https://routiin.ru/oauth2"
 >
   Login via Facebook
-</button>
+</a>
 
-<button
+<a
+  href="https://api.routiin.ru/oauth2/authorize/google?redirect_uri=https://routiin.ru/oauth2"
   class="login__btn login__btn--google"
   mat-flat-button
-  (click)="loginGoogle()"
 >
   Login via Google
-</button>
-
-<button class="login__btn login__btn--google" mat-flat-button>
-  <a
-    href="https://api.routiin.ru/oauth2/authorize/google?redirect_uri=https://routiin.ru/oauth2"
-    >External Google</a
-  >
-</button>
+</a>

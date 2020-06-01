@@ -13,6 +13,7 @@ const routes: Routes = [
       },
       {
         path: 'today',
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
           import('./modules/today/today.module').then((mod) => mod.TodayModule),
       },
@@ -44,6 +45,11 @@ const routes: Routes = [
         pathMatch: 'full',
       },
     ],
+  },
+  {
+    path: 'oauth2',
+    loadChildren: () =>
+      import('./modules/oauth2/oauth2.module').then((mod) => mod.Oauth2Module),
   },
   // { path: '**', component: Error404Component },
 ];

@@ -12,3 +12,7 @@ $client-warn: mat-palette($mat-red);
 $client-theme: mat-light-theme($client-primary, $client-accent, $client-warn);
 
 @include angular-material-theme($client-theme);
+
+html {
+  font-family: Inter, sans-serif;
+}
