@@ -7,7 +7,11 @@ import { AuthService } from 'src/app/core/auth/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  constructor(private _authService: AuthService) {}
+  constructor(private _authService: AuthService) {
+    this._authService
+      .init()
+      .subscribe((isAuth) => console.log('isAuth', isAuth));
+  }
 
   loginFacebook() {
     this._authService.loginFacebook().subscribe();

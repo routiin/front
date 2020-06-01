@@ -22,6 +22,20 @@ type SocialLoginNameType = keyof typeof SOCIAL_LOGIN_URI;
 export class AuthService {
   constructor(private _http: HttpClient, private _route: ActivatedRoute) {}
 
+  init(): Observable<boolean> {
+    return this._route.params.pipe(
+      take(1),
+      pluck('token'),
+      switchMap((token: string) =>
+        iif(
+          () => !!token,
+          of(true).pipe(tap(() => localStorage.setItem('token', `${token}`))),
+          of(false)
+        )
+      )
+    );
+  }
+
   loginFacebook(): Observable<boolean> {
     return this._oauth2Login('facebook');
   }
@@ -31,23 +45,7 @@ export class AuthService {
   }
 
   private _oauth2Login(name: SocialLoginNameType): Observable<boolean> {
-    return this._http
-      .get(SOCIAL_LOGIN_URI[name], {
-        params: {
-          redirect_uri: 'https://api.routiin.ru/oauth2',
-        },
-        withCredentials: true,
-      })
-      .pipe(
-        switchMap(() => this._route.params.pipe(take(1), pluck('token'))),
-        switchMap((token: string) =>
-          iif(
-            () => !!token,
-            of(true).pipe(tap(() => localStorage.setItem('token', `${token}`))),
-            of(false)
-          )
-        )
-      );
+    return of(true);
   }
 
   logout(): void {
