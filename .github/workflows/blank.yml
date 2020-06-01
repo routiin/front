@@ -2,24 +2,24 @@ name: Deploy on production
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - "**"
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build Angular App
-      uses: colbyhill21/angular-full-ci/@v1.0
-      with:
-        testcommand: run build
-    - name: Deploy to the server
-      uses: easingthemes/ssh-deploy@v2.1.1
-      env:
+      - uses: actions/checkout@v2
+      - name: Build Angular App
+        uses: colbyhill21/angular-full-ci/@v1.0
+        with:
+          testcommand: run build
+      - name: Deploy to the server
+        uses: easingthemes/ssh-deploy@v2.1.1
+        env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "dist/client/"
