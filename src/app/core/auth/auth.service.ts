@@ -36,6 +36,7 @@ export class AuthService {
         params: {
           redirect_uri: 'https://routiin.ru/oauth2',
         },
+        withCredentials: true,
       })
       .pipe(
         switchMap(() => this._route.params.pipe(take(1), pluck('token'))),
