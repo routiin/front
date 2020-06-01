@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './core/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,11 +18,13 @@ const routes: Routes = [
       },
       {
         path: 'feed',
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
           import('./modules/feed/feed.module').then((mod) => mod.FeedModule),
       },
       {
         path: 'progress',
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
           import('./modules/progress/progress.module').then(
             (mod) => mod.ProgressModule
@@ -29,6 +32,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
+        canActivateChild: [AuthGuard],
         loadChildren: () =>
           import('./modules/profile/profile.module').then(
             (mod) => mod.ProfileModule
