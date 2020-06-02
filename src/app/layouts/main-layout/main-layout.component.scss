@@ -1,0 +1,15 @@
+@import "variables";
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.content {
+  height: $content-height;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 15px;
+}

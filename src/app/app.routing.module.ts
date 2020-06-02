@@ -1,11 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthGuard } from './core/auth/auth.guard';
-import { LoginGuard } from './modules/login/login.guard';
+import { AuthGuard } from './core/guards/auth.guard';
+import { LoginGuard } from './core/guards/login.guard';
+import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 
 const routes: Routes = [
   {
     path: '',
+    redirectTo: '/today',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
+    component: BlankLayoutComponent,
     children: [
       {
         path: 'login',
@@ -15,9 +23,16 @@ const routes: Routes = [
       },
       {
         path: 'auth',
+        canActivateChild: [LoginGuard],
         loadChildren: () =>
           import('./core/auth/auth.module').then((mod) => mod.AuthModule),
       },
+    ],
+  },
+  {
+    path: '',
+    component: MainLayoutComponent,
+    children: [
       {
         path: 'today',
         canActivateChild: [AuthGuard],
@@ -46,15 +61,9 @@ const routes: Routes = [
             (mod) => mod.ProfileModule
           ),
       },
-      {
-        path: '',
-        redirectTo: '/today',
-        pathMatch: 'full',
-      },
     ],
   },
-
-  // { path: '**', component: Error404Component },
+  { path: '**', redirectTo: 'today' },
 ];
 
 @NgModule({

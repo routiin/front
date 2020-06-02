@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app.routing.module';
 import { APP_ICONS } from './constants/icons';
 import { IconRegistryModule } from './core/icon-registry/icon-registry.module';
+import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MainLayoutComponent, BlankLayoutComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
