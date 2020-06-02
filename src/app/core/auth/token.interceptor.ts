@@ -11,6 +11,10 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private _authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
+    if (!req.url.includes('api.routtin.ru')) {
+      return next.handle(req);
+    }
+
     const authToken =
       this._authService.getToken() || this._authService.getCheckedTocken();
 

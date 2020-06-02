@@ -18,6 +18,7 @@ export class AuthService {
     return this._http.get('https://api.routiin.ru/v1/user/me').pipe(
       catchError((err) => {
         localStorage.removeItem('token');
+        console.log('ERROR', err);
         return throwError('');
       }),
       tap((response) => localStorage.setItem('token', token))
@@ -30,6 +31,7 @@ export class AuthService {
   }
 
   isUserLoggedIn(): boolean {
+    return true;
     return !!localStorage.getItem('token');
   }
 
