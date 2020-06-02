@@ -1,21 +1,16 @@
 import { NgModule } from '@angular/core';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
+import { combineLatest, from, of } from 'rxjs';
 import {
-  ActivatedRoute,
-  Router,
-  RouterModule,
-  ActivationEnd,
-} from '@angular/router';
-import { from, race, of, combineLatest } from 'rxjs';
-import {
+  catchError,
   filter,
   map,
   pluck,
   switchMap,
   take,
   tap,
-  catchError,
 } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
 
@@ -32,10 +27,6 @@ export class AuthModule {
     snackBar: MatSnackBar,
     sanitizer: DomSanitizer
   ) {
-    const routerEvent$ = router.events.pipe(
-      filter((event) => event instanceof ActivationEnd)
-    );
-
     const errorParams$ = route.queryParams.pipe(
       filter((params) => params.hasOwnProperty('error')),
       pluck('error'),
@@ -49,7 +40,7 @@ export class AuthModule {
       switchMap((token: string) => authService.setToken(token))
     );
 
-    combineLatest([routerEvent$, tokenParams$, errorParams$])
+    combineLatest([tokenParams$, errorParams$])
       .pipe(
         catchError((err) => of(null)),
         take(1),
