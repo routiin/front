@@ -21,7 +21,7 @@ interface UserMeResponse {
 })
 export class HeaderComponent {
   imageUrl$ = this._http
-    .get<UserMeResponse>('https://api.routtin.ru/v1/user/me')
+    .get<UserMeResponse>('https://api.routin.ru/v1/user/me')
     .pipe(map((response) => response.imageUrl));
 
   constructor(private _http: HttpClient) {}

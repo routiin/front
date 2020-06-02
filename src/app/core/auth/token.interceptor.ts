@@ -11,7 +11,7 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private _authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if (!req.url.includes('api.routtin.ru')) {
+    if (!req.url.includes('api.routiin.ru')) {
       return next.handle(req);
     }
 
