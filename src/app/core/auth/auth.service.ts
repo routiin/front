@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 const HOST = 'https://api.routiin.ru';
 
@@ -14,12 +15,15 @@ type SocialLoginNameType = keyof typeof SOCIAL_LOGIN_URI;
   providedIn: 'root',
 })
 export class AuthService {
+  constructor(private _router: Router) {}
+
   setToken(token: string): void {
     localStorage.setItem('token', `${token}`);
   }
 
   removeToken(): void {
     localStorage.removeItem('token');
+    this._router.navigate(['/login']);
   }
 
   isUserLoggedIn(): boolean {

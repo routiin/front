@@ -10,6 +10,6 @@ export class AppComponent {
   constructor(private _authService: AuthService) {}
 
   isLogin() {
-    return false;
+    return this._authService.isUserLoggedIn();
   }
 }

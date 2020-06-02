@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { pluck, take, filter, switchMap } from 'rxjs/operators';
+import {
+  ActivatedRoute,
+  Router,
+  NavigationEnd,
+  RoutesRecognized,
+  RouterEvent,
+} from '@angular/router';
+import { pluck, take, filter, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
 
 @NgModule()
@@ -8,19 +14,22 @@ export class Oauth2Module {
   constructor(route: ActivatedRoute, authService: AuthService, router: Router) {
     router.events
       .pipe(
-        filter((event) => event instanceof NavigationEnd),
-        switchMap(() => route.queryParams.pipe(take(1), pluck('token')))
+        filter((event) => event instanceof RoutesRecognized),
+        take(1)
       )
-      .subscribe((token) => {
-        console.log('token', token);
+      .subscribe((event) => {
+        if (event instanceof RoutesRecognized) {
+          const token = event.url.split('token=')[1];
+          const error = event.url.split('error=')[1];
 
-        if (!token) {
-          router.navigate(['/login']);
-          return;
+          if (!token) {
+            router.navigate(['/login'], { state: { error } });
+            return;
+          }
+
+          authService.setToken(token);
+          router.navigate(['/today']);
         }
-
-        authService.setToken(token);
-        router.navigate(['/today']);
       });
   }
 }
