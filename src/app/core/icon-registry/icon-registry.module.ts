@@ -5,6 +5,10 @@ import { IconRegistryService } from './icon-registry.service';
 
 @NgModule({})
 export class IconRegistryModule {
+  constructor(iconRegistry: IconRegistryService) {
+    iconRegistry.init();
+  }
+
   static forRoot(config: IconRegistryConfig): ModuleWithProviders {
     return {
       ngModule: IconRegistryModule,

@@ -15,7 +15,9 @@ export class IconRegistryService {
     @Inject(ICON_REGISTRY_CONFIG) private _config: IconRegistryConfig,
     public iconRegistry: MatIconRegistry,
     private _sanitizer: DomSanitizer
-  ) {
+  ) {}
+
+  init() {
     const config = { ...DEFAULT_REGISTRY_CONFIG, ...this._config };
     const { icons, iconsFolderPath } = config;
 
