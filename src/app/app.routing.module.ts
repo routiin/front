@@ -40,17 +40,20 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'oauth2',
+        loadChildren: () =>
+          import('./modules/oauth2/oauth2.module').then(
+            (mod) => mod.Oauth2Module
+          ),
+      },
+      {
         path: '',
         redirectTo: '/today',
         pathMatch: 'full',
       },
     ],
   },
-  {
-    path: 'oauth2',
-    loadChildren: () =>
-      import('./modules/oauth2/oauth2.module').then((mod) => mod.Oauth2Module),
-  },
+
   // { path: '**', component: Error404Component },
 ];
 

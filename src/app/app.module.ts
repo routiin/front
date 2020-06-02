@@ -7,6 +7,7 @@ import { AppRoutingModule } from './app.routing.module';
 import { SharedModule } from './shared/shared.module';
 import { IconsService } from './core/icon-registry.service';
 import { TokenInterceptor } from './core/auth/token.interceptor';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +23,11 @@ import { TokenInterceptor } from './core/auth/token.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
       multi: true,
+    },
+
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: { panelClass: 'rtn-snack-bar-container' },
     },
   ],
   bootstrap: [AppComponent],
