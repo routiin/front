@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { throwError } from 'rxjs';
+import { throwError, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -15,6 +15,11 @@ export class AuthService {
 
   setToken(token: string) {
     this._checkedToken = token;
+
+    if (!environment.production) {
+      localStorage.setItem('token', token);
+      return of(true);
+    }
 
     return this._http.get(environment.api.getUserURI).pipe(
       catchError((err) => {

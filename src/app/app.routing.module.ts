@@ -17,13 +17,12 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
-        canActivateChild: [LoginGuard],
+        canActivate: [LoginGuard],
         loadChildren: () =>
           import('./modules/login/login.module').then((mod) => mod.LoginModule),
       },
       {
         path: 'auth',
-        canActivateChild: [LoginGuard],
         loadChildren: () =>
           import('./core/auth/auth.module').then((mod) => mod.AuthModule),
       },
