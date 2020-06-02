@@ -1,15 +1,11 @@
 <h1 class="login__title">Routtin</h1>
 
-<a
-  class="login__btn login__btn--fb"
-  mat-flat-button
-  href="https://api.routiin.ru/oauth2/authorize/facebook?redirect_uri=https://routiin.ru/oauth2"
->
+<a class="login__btn login__btn--fb" mat-flat-button [href]="fbAuthHref">
   Login via Facebook
 </a>
 
 <a
-  href="https://api.routiin.ru/oauth2/authorize/google?redirect_uri=https://routiin.ru/oauth2"
+  [href]="googleAuthHref"
   class="login__btn login__btn--google"
   mat-flat-button
 >
