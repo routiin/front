@@ -5,13 +5,14 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { AuthService } from './auth.service';
+import { API_SERVER_URI } from 'src/app/components/header/header.component';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private _authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if (!req.url.includes('api.routiin.ru')) {
+    if (!req.url.includes(API_SERVER_URI)) {
       return next.handle(req);
     }
 

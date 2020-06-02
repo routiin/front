@@ -13,6 +13,8 @@ interface UserMeResponse {
   score: number;
 }
 
+export const API_SERVER_URI = 'https://api.routiin.ru/v1';
+
 @Component({
   selector: 'rtn-header',
   templateUrl: './header.component.html',
@@ -21,7 +23,7 @@ interface UserMeResponse {
 })
 export class HeaderComponent {
   imageUrl$ = this._http
-    .get<UserMeResponse>('https://api.routin.ru/v1/user/me')
+    .get<UserMeResponse>(`${API_SERVER_URI}/user/me`)
     .pipe(map((response) => response.imageUrl));
 
   constructor(private _http: HttpClient) {}

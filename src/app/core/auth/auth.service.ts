@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Observable, of, throwError } from 'rxjs';
+import { API_SERVER_URI } from 'src/app/components/header/header.component';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class AuthService {
   setToken(token: string) {
     this._checkedTocken = token;
 
-    return this._http.get('https://api.routiin.ru/v1/user/me').pipe(
+    return this._http.get(`${API_SERVER_URI}/user/me`).pipe(
       catchError((err) => {
         localStorage.removeItem('token');
         console.log('ERROR', err);
