@@ -1,23 +1,23 @@
-import { Injectable } from '@angular/core';
 import {
-  HttpRequest,
   HttpHandler,
   HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
-import { AuthService } from './auth.service';
-import { API_SERVER_URI } from 'src/app/components/header/header.component';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
-export class TokenInterceptor implements HttpInterceptor {
+export class ApiTokenInterceptor implements HttpInterceptor {
   constructor(private _authService: AuthService) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    if (!req.url.includes(API_SERVER_URI)) {
+    if (!req.url.includes(environment.api.hostURI)) {
       return next.handle(req);
     }
 
     const authToken =
-      this._authService.getToken() || this._authService.getCheckedTocken();
+      this._authService.getToken() || this._authService.getCheckedToken();
 
     if (authToken) {
       const cloneReq = req.clone({
