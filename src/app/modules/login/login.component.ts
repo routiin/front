@@ -15,7 +15,7 @@ export class LoginComponent {
     const isLoginError = (this.router.getCurrentNavigation()?.extras
       .state as any)?.error;
 
-    if (!isLoginError) {
+    if (isLoginError) {
       this.snackBar.open(LOGIN_ERROR_MESSAGE, 'OK', {
         duration: 300000,
         panelClass: 'rtn-snack-bar-container',
