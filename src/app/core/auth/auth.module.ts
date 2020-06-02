@@ -7,8 +7,16 @@ import {
   RouterModule,
   ActivationEnd,
 } from '@angular/router';
-import { from, race } from 'rxjs';
-import { filter, map, pluck, switchMap, take, tap } from 'rxjs/operators';
+import { from, race, of, combineLatest } from 'rxjs';
+import {
+  filter,
+  map,
+  pluck,
+  switchMap,
+  take,
+  tap,
+  catchError,
+} from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
 
 const EMPTY_AUTH_ERR_MESS = 'Unknown authorization error. Please try later';
@@ -38,11 +46,12 @@ export class AuthModule {
     const tokenParams$ = route.queryParams.pipe(
       filter((params) => params.hasOwnProperty('token')),
       pluck('token'),
-      tap((token: string) => authService.setToken(token))
+      switchMap((token: string) => authService.setToken(token))
     );
 
-    race([routerEvent$, tokenParams$, errorParams$])
+    combineLatest([routerEvent$, tokenParams$, errorParams$])
       .pipe(
+        catchError((err) => of(null)),
         take(1),
         switchMap(() => from(router.navigate(['/'])))
       )
