@@ -4,15 +4,16 @@ import {
   CanActivateChild,
   Router,
   RouterStateSnapshot,
+  CanActivate,
 } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
-export class LoginGuard implements CanActivateChild {
+export class LoginGuard implements CanActivate {
   constructor(private _authService: AuthService, private _router: Router) {}
 
-  canActivateChild(
+  canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
