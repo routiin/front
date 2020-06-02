@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
-const AUTH_URI = 'https://api.routiin.ru/oauth2/authorize/';
-const REDIRECT_URI = 'https://routiin.ru/auth';
+import { environment } from 'src/environments/environment';
 
 @Component({
   templateUrl: './login.component.html',
@@ -9,6 +7,6 @@ const REDIRECT_URI = 'https://routiin.ru/auth';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginComponent {
-  fbAuthHref = `${AUTH_URI}/facebook?redirect_uri=${REDIRECT_URI}`;
-  googleAuthHref = `${AUTH_URI}/google?redirect_uri=${REDIRECT_URI}`;
+  authFbURI = environment.api.authFbURI;
+  authGoogleURI = environment.api.authGoogleURI;
 }

@@ -1,22 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { map, catchError, tap } from 'rxjs/operators';
-import { Observable, of, throwError } from 'rxjs';
-import { API_SERVER_URI } from 'src/app/components/header/header.component';
+import { throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private _checkedTocken: string;
+  private _checkedToken: string;
 
   constructor(private _router: Router, private _http: HttpClient) {}
 
   setToken(token: string) {
-    this._checkedTocken = token;
+    this._checkedToken = token;
 
-    return this._http.get(`${API_SERVER_URI}/user/me`).pipe(
+    return this._http.get(environment.api.getUserURI).pipe(
       catchError((err) => {
         localStorage.removeItem('token');
         console.log('ERROR', err);
@@ -27,8 +27,8 @@ export class AuthService {
   }
 
   removeToken(): void {
-    this._router.navigate(['/login']);
     localStorage.removeItem('token');
+    this._router.navigate(['/login']);
   }
 
   isUserLoggedIn(): boolean {
@@ -39,7 +39,7 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  getCheckedTocken() {
-    return this._checkedTocken;
+  getCheckedToken(): string | null {
+    return this._checkedToken;
   }
 }
