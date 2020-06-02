@@ -1,29 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
-const HOST = 'https://api.routiin.ru';
-
-// prettier-ignore
-const SOCIAL_LOGIN_URI = {
-  facebook : `${HOST}/oauth2/authorize/facebook`,
-  google   : `${HOST}/oauth2/authorize/google`,
-} as const;
-
-type SocialLoginNameType = keyof typeof SOCIAL_LOGIN_URI;
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private _router: Router) {}
+  constructor(private _router: Router, private _http: HttpClient) {}
 
   setToken(token: string): void {
-    localStorage.setItem('token', `${token}`);
+    this._http.get('https://api.routiin.ru/v1/user/me').subscribe(
+      (response) => {
+        console.log('response', response);
+        localStorage.setItem('token', `${token}`);
+      },
+      (error) => {
+        console.log('error', error);
+        this._router.navigate(['/']);
+      }
+    );
   }
 
   removeToken(): void {
-    localStorage.removeItem('token');
     this._router.navigate(['/login']);
+    localStorage.removeItem('token');
   }
 
   isUserLoggedIn(): boolean {
