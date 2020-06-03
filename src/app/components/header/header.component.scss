@@ -15,6 +15,9 @@
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+
   &__image {
     width: 30px;
     margin-right: 10px;
