@@ -17,7 +17,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('ca');
     if (!this._authService.isUserLoggedIn()) {
       this._router.navigate(['/login']);
       return false;
@@ -30,7 +29,6 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | boolean {
-    console.log('ca');
     if (!this._authService.isUserLoggedIn()) {
       this._router.navigate(['/login']);
       return false;

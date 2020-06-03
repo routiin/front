@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
-  templateUrl: './main-layout.component.html',
-  styleUrls: ['./main-layout.component.scss'],
+  templateUrl: './blank.component.html',
+  styleUrls: ['./blank.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainLayoutComponent {}
+export class BlankLayoutComponent {}

@@ -4,10 +4,13 @@ import { ToolbarModule } from '../components/toolbar/toolbar.module';
 import { HeaderModule } from '../components/header/header.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiTokenInterceptor } from '../core/interceptors/api-token.interceptor';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import {
+  MAT_SNACK_BAR_DEFAULT_OPTIONS,
+  MatSnackBarModule,
+} from '@angular/material/snack-bar';
 
 @NgModule({
-  exports: [HeaderModule, ToolbarModule, CardModule],
+  exports: [HeaderModule, ToolbarModule, CardModule, MatSnackBarModule],
 })
 export class SharedModule {
   static forRoot(): ModuleWithProviders {

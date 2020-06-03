@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/guards/auth.guard';
 import { LoginGuard } from './core/guards/login.guard';
-import { BlankLayoutComponent } from './layouts/blank-layout/blank-layout.component';
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { BlankLayoutComponent } from './layouts/blank/blank.component';
+import { MainLayoutComponent } from './layouts/main/main.component';
 
 const routes: Routes = [
   {
@@ -23,6 +23,7 @@ const routes: Routes = [
       },
       {
         path: 'auth',
+        canActivate: [LoginGuard],
         loadChildren: () =>
           import('./core/auth/auth.module').then((mod) => mod.AuthModule),
       },
@@ -34,19 +35,19 @@ const routes: Routes = [
     children: [
       {
         path: 'today',
-        canActivateChild: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/today/today.module').then((mod) => mod.TodayModule),
       },
       {
         path: 'feed',
-        canActivateChild: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/feed/feed.module').then((mod) => mod.FeedModule),
       },
       {
         path: 'progress',
-        canActivateChild: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/progress/progress.module').then(
             (mod) => mod.ProgressModule
@@ -54,7 +55,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        canActivateChild: [AuthGuard],
+        canActivate: [AuthGuard],
         loadChildren: () =>
           import('./modules/profile/profile.module').then(
             (mod) => mod.ProfileModule
