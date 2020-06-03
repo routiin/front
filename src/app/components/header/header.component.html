@@ -3,4 +3,6 @@
   <span class="logo__title">Routiin</span>
 </div>
 
-<div class="user"></div>
+<div class="user">
+  <img *ngIf="imageUrl$" class="user__img" [src]="imageUrl$ | async" />
+</div>
