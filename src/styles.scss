@@ -1,7 +1,11 @@
 @import "~normalize.css";
 
-@import "styles/box-sizing.scss";
-@import "styles/typography.scss";
-@import "styles/theme.scss";
-@import "styles/page.scss";
-@import "styles/snackbar.scss";
+/* Global */
+@import "styles/global/fonts.scss";
+@import "styles/global/box-sizing.scss";
+@import "styles/global/typography.scss";
+@import "styles/global/page.scss";
+
+/* Material */
+@import "styles/material/theme.scss";
+@import "styles/material/snackbar.scss";
