@@ -1,10 +1,10 @@
 <button
-  *ngFor="let btn of ['today', 'feed', 'add', 'progress', 'profile']"
+  *ngFor="let btn of buttons"
   mat-button
   class="btn"
   [routerLink]="'/' + btn"
   routerLinkActive="btn--activate"
 >
-  <mat-icon [ngClass]="btn" [svgIcon]="btn"></mat-icon>
+  <mat-icon>{{ icons[btn] }}</mat-icon> <br />
   {{ btn | titlecase }}
 </button>
