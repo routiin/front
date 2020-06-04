@@ -1,12 +1,10 @@
-<button mat-icon-button routerLink="/today">
-  <mat-icon svgIcon="today"></mat-icon>
-</button>
-<button mat-icon-button routerLink="/feed">
-  <mat-icon svgIcon="feed"></mat-icon>
-</button>
-<button mat-icon-button routerLink="/progress">
-  <mat-icon svgIcon="progress"></mat-icon>
-</button>
-<button mat-icon-button routerLink="/profile">
-  <mat-icon svgIcon="profile"></mat-icon>
+<button
+  *ngFor="let btn of ['today', 'feed', 'add', 'progress', 'profile']"
+  mat-button
+  class="btn"
+  [routerLink]="'/' + btn"
+  routerLinkActive="btn--activate"
+>
+  <mat-icon [ngClass]="btn" [svgIcon]="btn"></mat-icon>
+  {{ btn | titlecase }}
 </button>
